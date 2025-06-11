@@ -3,11 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>个人简介与简历综合页</title>
     <link rel="stylesheet" href="./css/jl.css">
-    <script src="./js/jl.js"></script>
+
 </head>
 <body>
-    
+    <!-- 顶部背景及插画区域 -->
+  <header class="top-bak">
+    <img src="./img/插画背景.jpg" alt="插画背景" class="top-img">
+    <nav class="nav-bar">
+      <ul>
+        <li><a href="#home">首页</a></li>
+        <li><a href="#profile">个人简介</a></li>
+        <li><a href="#hobbies">个人爱好</a></li>
+        <li><a href="#skills">专业技能</a></li>
+        <li><a href="#portfolio">项目经验</a></li>
+        <li><a href="#contact">联系我</a></li>
+      </ul>
+      <div class="hamburger"></div>
+      <button id="dark-mode-toggle">深色模式</button>
+    </nav>
+  </header>
+
+  <!-- 个人简介主体区域 -->
+  <main class="container">
+    <section id="home" style="height: 0;"></section>
+    <section id="profile" class="profile">
+      <h2>个人简介</h2>
+      <div class="profile-box">
+        <div class="profile-pic">
+          <!-- 这里可替换成自己的头像 -->
+          <img src="./img/个人头像.jpg" alt="个人头像">
+        </div>
+        <div class="profile-info">
+          <div class="info-item">
+            <span class="label">姓名：</span>
+            <span class="value" id="name">离思</span>
+          </div>
+          <div class="info-item">
+            <span class="label">性别：</span>
+            <span class="value" id="gender">女</span>
+          </div>
+          <div class="info-item">
+            <span class="label">性格：</span>
+            <span class="value" id="personality">感性独立的infp人一枚</span>
+          </div>
+          <div class="info-item">
+            <span class="label">地区：</span>
+            <span class="value" id="region">海南省 三亚市 吉阳区</span>
+          </div>
+          <div class="info-item">
+            <span class="label">爱好：</span>
+            <span class="value" id="hobby">摄影 旅游 听歌</span>
+          </div>
+          <div class="intro">
+            <h3>教育经历</h3>
+            <p id="self-intro">于2023年从安徽省太和中学毕业，现就读于海南省三亚市三亚学院盛宝金融科技商学院区块链工程专业。</p>
+          </div>
+          <div class="intro">
+            <h3>个人简介</h3>
+            <p id="self-intro">间歇性社牛，持续性社恐的infp人，日常爱捧着各种类型的书沉浸，也会循环治愈系歌单。闲暇时就奔赴不同城市乡镇，用镜头捕捉风土人情里的闪光瞬间，把旅途故事悄悄存进自己的精神宇宙。</p>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <section id="hobbies" class="hobbies">
+      <h2>个人爱好</h2>
+      <div class="hobby-cards">
+        <div class="hobby-card">
+          <img src="./img/摄影.jpg" alt="摄影图标">
+          <p>摄影</p>
+        </div>
+        <div class="hobby-card">
+          <img src="./img/旅游.jpg" alt="旅游图标">
+          <p>旅游</p>
+        </div>
+        <div class="hobby-card">
+          <img src="./img/听歌.jpg" alt="听歌图标">
+          <p>听歌</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="skills">
+      <h2>我的技能</h2>
+      <div class="skill-item">
+        <div class="skill-name">
+          <span>HTML/CSS</span>
+          <span>95%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-progress" style="width: 95%;"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">
+          <span>JavaScript</span>
+          <span>90%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-progress" style="width: 90%;"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">
+          <span>Python</span>
+          <span>85%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-progress" style="width: 85%;"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">
+          <span>C语言</span>
+          <span>80%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-progress" style="width: 80%;"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+      <h2>我的作品集</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <div class="portfolio-img">
+            <img src="./img/盛宝官网.png" alt="盛宝官网设计">
+          </div>
+          <div class="portfolio-info">
+            <h3>盛宝学院官网设计</h3>
+            <p>利用 HTML、CSS 及服务端脚本构建的学院站点内容聚合系统 。</p>
+            <a href="http://127.0.0.1:5502/index.html" class="btn">查看详情</a>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-img">
+            <img src="./img/聊天助手.png" alt="聊天助手">
+          </div>
+          <div class="portfolio-info">
+            <h3>三亚学院智能聊天助手</h3>
+            <p>基于 JS 与 Axios 搭建，接入阿里云通义千问大模型的智能对话交互平台，支持问题实时收发 。</p>
+            <a href="http://127.0.0.1:5500/public/index.html" class="btn">查看详情</a>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-img">
+            <img src="./img/hash.png" alt="hash算法">
+          </div>
+          <div class="portfolio-info">
+            <h3>hash算法网页</h3>
+            <p>基于哈希算法（MD5、SHA 系列等）实现的文本哈希计算工具系统。</p>
+            <a href="http://127.0.0.1:5500/hash.html" class="btn">查看详情</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>联系我</h2>
+      <form class="contact-form">
+        <div class="form-group">
+          <label for="name">姓名</label>
+          <input type="text" id="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="email">邮箱</label>
+          <input type="email" id="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="message">留言</label>
+          <textarea id="message" class="form-control" required></textarea>
+        </div>
+        <button type="submit" class="btn">发送消息</button>
+      </form>
+    </section>
+  </main>
+
+<!-- 智能聊天机器人 -->
+<div class="chat-bot">
+  <div class="bot-bubble">有什么可以帮助您的吗？</div>
+  <div class="chat-button" id="chat-button">
+    <img src="./img/机器人头像.jpg" alt="机器人头像">
+  </div>
+  <div class="chat-container" id="chat-container">
+    <div class="chat-header">
+      <h3>
+        <div class="chat-avatar">
+          <img src="./img/机器人头像.jpg" alt="机器人头像">
+        </div>
+        智能助手
+      </h3>
+      <div class="close-chat" id="close-chat">×</div>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="message bot-message">
+        <div class="message-avatar">
+          <img src="./img/机器人头像.jpg" alt="机器人头像">
+        </div>
+        <div class="message-content">
+          你好！我是你的智能助手，有什么可以帮助你的吗？
+        </div>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="message-input" placeholder="输入消息...">
+      <button id="send-message">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+  <div class="back-to-top" id="back-to-top">返回顶部</div>
+
+  <footer class="footer">
+    <p>版权所有 © 离思</p>
+    <ul class="social-links">
+      <li><a href="#"><i class="fab fa-github"></i></a></li>
+      <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+      <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+      <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+    </ul>
+  </footer>
+
+  <script src="./js/jl.js"></script>
+
 </body>
 </html>
