@@ -19,11 +19,80 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// 动态加载Font Awesome图标
-const faScript = document.createElement('script');
-faScript.src = 'https://kit.fontawesome.com/a076d05399.js';
-faScript.crossOrigin = 'anonymous';
-document.head.appendChild(faScript);
+// 轮播图功能
+document.addEventListener('DOMContentLoaded', function() {
+  // 动态加载Font Awesome图标
+  const faScript = document.createElement('script');
+  faScript.src = 'https://kit.fontawesome.com/a076d05399.js';
+  faScript.crossOrigin = 'anonymous';
+  document.head.appendChild(faScript);
+  
+  // 获取所有轮播图容器
+  const carousels = document.querySelectorAll('.hobby-carousel');
+  
+  // 初始化每个轮播图
+  carousels.forEach(carousel => {
+    const hobby = carousel.dataset.hobby;
+    const slidesContainer = document.getElementById(`${hobby}-slides`);
+    const slides = slidesContainer.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll(`#${hobby}-indicators .indicator`);
+    const prevButton = carousel.querySelector('.carousel-control.prev');
+    const nextButton = carousel.querySelector('.carousel-control.next');
+    
+    let currentSlide = 0;
+    const slideCount = slides.length;
+    
+    // 更新轮播图位置和指示器
+    function updateCarousel() {
+      slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      indicators.forEach((indicator, index) => {
+        if (index === currentSlide) {
+          indicator.classList.add('active');
+        } else {
+          indicator.classList.remove('active');
+        }
+      });
+    }
+    
+    // 下一张幻灯片
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slideCount;
+      updateCarousel();
+    }
+    
+    // 上一张幻灯片
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+      updateCarousel();
+    }
+    
+    // 指示器点击事件
+    indicators.forEach(indicator => {
+      indicator.addEventListener('click', () => {
+        currentSlide = parseInt(indicator.dataset.slide);
+        updateCarousel();
+      });
+    });
+    
+    // 控制按钮点击事件
+    prevButton.addEventListener('click', prevSlide);
+    nextButton.addEventListener('click', nextSlide);
+    
+    // 设置自动播放
+    let autoplayInterval = setInterval(nextSlide, 5000);
+    
+    // 鼠标悬停暂停自动播放
+    carousel.addEventListener('mouseenter', () => {
+      clearInterval(autoplayInterval);
+    });
+    
+    // 鼠标离开恢复自动播放
+    carousel.addEventListener('mouseleave', () => {
+      autoplayInterval = setInterval(nextSlide, 5000);
+    });
+  });
+});
 
 // 表单提交
 const contactForm = document.querySelector('.contact-form');

@@ -69,23 +69,98 @@
       </div>
     </section>
 
-    <section id="hobbies" class="hobbies">
-      <h2>个人爱好</h2>
-      <div class="hobby-cards">
-        <div class="hobby-card">
-          <img src="./img/摄影.jpg" alt="摄影图标">
-          <p>摄影</p>
+  <!-- 个人爱好部分 -->
+  <section id="hobbies" class="hobbies">
+    <h2>个人爱好</h2>
+    <div class="hobby-cards">
+      <!-- 摄影爱好 -->
+      <div class="hobby-card">
+        <div class="hobby-carousel" data-hobby="photography">
+          <div class="carousel-slides" id="photography-slides">
+            <div class="carousel-slide">
+              <img src="./img/摄影1.jpg" alt="摄影1">
+            </div>
+            <div class="carousel-slide">
+              <img src="./img/摄影2.jpg" alt="摄影2">
+            </div>
+            <div class="carousel-slide">
+              <img src="./img/摄影3.jpg" alt="人像摄影">
+            </div>
+          </div>
+          <div class="carousel-control prev" data-hobby="photography">
+            <i class="fas fa-chevron-left"></i>
+          </div>
+          <div class="carousel-control next" data-hobby="photography">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+          <div class="carousel-indicators" id="photography-indicators">
+            <div class="indicator active" data-slide="0"></div>
+            <div class="indicator" data-slide="1"></div>
+            <div class="indicator" data-slide="2"></div>
+          </div>
         </div>
-        <div class="hobby-card">
-          <img src="./img/旅游.jpg" alt="旅游图标">
-          <p>旅游</p>
-        </div>
-        <div class="hobby-card">
-          <img src="./img/听歌.jpg" alt="听歌图标">
-          <p>听歌</p>
-        </div>
+        <p>摄影</p>
       </div>
-    </section>
+
+      <!-- 旅游爱好 -->
+      <div class="hobby-card">
+        <div class="hobby-carousel" data-hobby="travel">
+          <div class="carousel-slides" id="travel-slides">
+            <div class="carousel-slide">
+              <img src="./img/旅游1.jpg" alt="旅游1">
+            </div>
+            <div class="carousel-slide">
+              <img src="./img/旅游2.jpg" alt="旅游2">
+            </div>
+            <div class="carousel-slide">
+              <img src="./img/旅游3.jpg" alt="旅游3">
+            </div>
+          </div>
+          <div class="carousel-control prev" data-hobby="travel">
+            <i class="fas fa-chevron-left"></i>
+          </div>
+          <div class="carousel-control next" data-hobby="travel">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+          <div class="carousel-indicators" id="travel-indicators">
+            <div class="indicator active" data-slide="0"></div>
+            <div class="indicator" data-slide="1"></div>
+            <div class="indicator" data-slide="2"></div>
+          </div>
+        </div>
+        <p>旅游</p>
+      </div>
+
+      <!-- 音乐爱好 -->
+      <div class="hobby-card">
+        <div class="hobby-carousel" data-hobby="music">
+          <div class="carousel-slides" id="music-slides">
+            <div class="carousel-slide">
+              <img src="./img/听歌1.jpg" alt="听歌1">
+            </div>
+            <div class="carousel-slide">
+              <img src="./img/听歌2.jpg" alt="听歌2">
+            </div>
+            <div class="carousel-slide">
+              <img src="./img/听歌3.jpg" alt="听歌3">
+            </div>
+          </div>
+          <div class="carousel-control prev" data-hobby="music">
+            <i class="fas fa-chevron-left"></i>
+          </div>
+          <div class="carousel-control next" data-hobby="music">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+          <div class="carousel-indicators" id="music-indicators">
+            <div class="indicator active" data-slide="0"></div>
+            <div class="indicator" data-slide="1"></div>
+            <div class="indicator" data-slide="2"></div>
+          </div>
+        </div>
+        <p>音乐</p>
+      </div>
+    </div>
+  </section>
 
     <section id="skills" class="skills">
       <h2>我的技能</h2>
