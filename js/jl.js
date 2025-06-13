@@ -11,11 +11,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
 
-    navLinks.classList.remove('active');
-
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-    });
+    // 获取目标ID
+    const targetId = this.getAttribute('href');
+    const targetElement = document.querySelector(targetId);
+        
+    if (targetElement) {
+      // 滚动到目标位置
+      targetElement.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
   });
 });
 

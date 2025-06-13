@@ -9,8 +9,15 @@
 </head>
 <body>
     <!-- 顶部背景及插画区域 -->
-  <header class="top-bak">
+  <header class="top-bak" id="home">
     <img src="./img/插画背景.jpg" alt="插画背景" class="top-img">
+    <div class="top-overlay"></div> <!-- 背景遮罩层 -->
+    
+    <!-- 欢迎语句 -->
+    <div class="welcome-message">
+      <h1 class="welcome-title">欢迎来到离思的个人主页</h1>
+      <p class="welcome-subtitle">探索我的技能、项目和兴趣爱好</p>
+    </div>
     <nav class="nav-bar">
       <ul>
         <li><a href="#home">首页</a></li>
@@ -32,7 +39,6 @@
       <h2>个人简介</h2>
       <div class="profile-box">
         <div class="profile-pic">
-          <!-- 这里可替换成自己的头像 -->
           <img src="./img/个人头像.jpg" alt="个人头像">
         </div>
         <div class="profile-info">
@@ -212,7 +218,7 @@
           <div class="portfolio-info">
             <h3>盛宝学院官网设计</h3>
             <p>利用 HTML、CSS 及服务端脚本构建的学院站点内容聚合系统 。</p>
-            <a href="http://127.0.0.1:5502/index.html" class="btn">查看详情</a>
+            <a href="./index.html" class="btn">查看详情</a>
           </div>
         </div>
         <div class="portfolio-item">
@@ -222,7 +228,7 @@
           <div class="portfolio-info">
             <h3>三亚学院智能聊天助手</h3>
             <p>基于 JS 与 Axios 搭建，接入阿里云通义千问大模型的智能对话交互平台，支持问题实时收发 。</p>
-            <a href="http://127.0.0.1:5500/public/index.html" class="btn">查看详情</a>
+            <a href="./tongyichat/public/index.html" class="btn">查看详情</a>
           </div>
         </div>
         <div class="portfolio-item">
@@ -232,7 +238,7 @@
           <div class="portfolio-info">
             <h3>hash算法网页</h3>
             <p>基于哈希算法（MD5、SHA 系列等）实现的文本哈希计算工具系统。</p>
-            <a href="http://127.0.0.1:5500/hash.html" class="btn">查看详情</a>
+            <a href="./hash.html" class="btn">查看详情</a>
           </div>
         </div>
       </div>
@@ -298,10 +304,9 @@
   <footer class="footer">
     <p>版权所有 © 离思</p>
     <ul class="social-links">
-      <li><a href="#"><i class="fab fa-github"></i></a></li>
-      <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-      <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-      <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+      <li>点击这里进入离思的GitHub</li>
+      <li>→</li>
+      <li><a href="https://github.com/wrzqkl">进入<i class="fab fa-github"></i></a></li>
     </ul>
   </footer>
 
