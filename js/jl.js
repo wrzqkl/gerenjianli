@@ -148,7 +148,6 @@ const chatMessages = document.getElementById('chat-messages');
 // 打开/关闭聊天窗口
 chatButton.addEventListener('click', () => {
   chatContainer.style.display = chatContainer.style.display === 'flex' ? 'none' : 'flex';
-  // 打开聊天窗口时自动聚焦输入框
   if (chatContainer.style.display === 'flex') {
     messageInput.focus();
   }
@@ -159,57 +158,149 @@ closeChat.addEventListener('click', () => {
 });
 
 // 发送消息
-function sendUserMessage() {
+async function sendUserMessage() {
   const message = messageInput.value.trim();
-  if (message) {
-    // 添加用户消息
-    const userMessage = document.createElement('div');
-    userMessage.className = 'message user-message';
-    userMessage.innerHTML = `
-      <div class="message-content">${message}</div>
+  if (!message) return;
+
+  // 添加用户消息
+  addMessage(message, 'user');
+  messageInput.value = '';
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  // 显示"正在输入"指示器
+  const typingIndicator = addTypingIndicator();
+  
+  try {
+    // 尝试调用AI API
+    let aiResponse = await getAIResponse(message);
+    
+    // 如果API返回空响应，使用备用回复
+    if (!aiResponse || aiResponse.trim() === '') {
+      aiResponse = getFallbackResponse(message);
+    }
+    
+    chatMessages.removeChild(typingIndicator);
+    addMessage(aiResponse, 'bot');
+  } catch (error) {
+    chatMessages.removeChild(typingIndicator);
+    const fallbackResponse = getFallbackResponse(message);
+    addMessage(fallbackResponse, 'bot');
+    console.error('AI请求失败:', error);
+  }
+  
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// 添加消息到聊天窗口
+function addMessage(content, sender) {
+  const message = document.createElement('div');
+  message.className = `message ${sender}-message`;
+  
+  const avatarImg = sender === 'user' ? './img/用户头像.jpg' : './img/机器人头像.jpg';
+  const avatarAlt = sender === 'user' ? '用户头像' : '机器人头像';
+  
+  message.innerHTML = sender === 'user' 
+    ? `
+      <div class="message-content">${content}</div>
       <div class="message-avatar">
-        <img src="./img/用户头像.jpg" alt="用户头像">
+        <img src="${avatarImg}" alt="${avatarAlt}">
       </div>
+    `
+    : `
+      <div class="message-avatar">
+        <img src="${avatarImg}" alt="${avatarAlt}">
+      </div>
+      <div class="message-content">${content}</div>
     `;
-    chatMessages.appendChild(userMessage);
+  
+  chatMessages.appendChild(message);
+}
 
-    // 清空输入框
-    messageInput.value = '';
+// 添加"正在输入"指示器
+function addTypingIndicator() {
+  const typing = document.createElement('div');
+  typing.className = 'message bot-message typing-indicator';
+  typing.innerHTML = `
+    <div class="message-avatar">
+      <img src="./img/机器人头像.jpg" alt="机器人头像">
+    </div>
+    <div class="message-content">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  `;
+  chatMessages.appendChild(typing);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  return typing;
+}
 
-    // 滚动到底部
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+// 调用AI API获取回复 - 实际使用时替换为您的API端点
+async function getAIResponse(message) {
+  try {
+    // 示例API调用 - 替换为您的实际API
+    const API_URL = 'https://dashscope.aliyuncs.com/compatible-mode/v1';
+    
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'package/json',
+        'Authorization': 'sk-e1c7036f643f439e9b223fcb41fa3649'
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          { role: 'system', content: '你是一个有帮助的AI助手。回答要简洁专业。' },
+          { role: 'user', content: message }
+        ],
+        temperature: 0.7,
+        max_tokens: 150
+      }),
+      timeout: 10000 // 10秒超时
+    });
 
-    // 模拟机器人回复
-    setTimeout(() => {
-      let botResponse = '我不太理解您的问题。您可以尝试换一种表达方式，或者问我一些其他问题。';
-      
-      // 根据用户消息内容提供不同的回复
-      if (message.toLowerCase().includes('你好') || message.toLowerCase().includes('hi')) {
-        botResponse = '你好！很高兴为您服务。有什么我可以帮助您的吗？';
-      } else if (message.toLowerCase().includes('技能') || message.toLowerCase().includes('能力')) {
-        botResponse = '您可以在"专业技能"部分查看我的技能详情，包括HTML/CSS、JavaScript、React和Vue.js等。';
-      } else if (message.toLowerCase().includes('项目') || message.toLowerCase().includes('作品')) {
-        botResponse = '您可以在"项目经验"部分查看我的作品集，包括电子商务网站、任务管理应用和个人博客系统等。';
-      } else if (message.toLowerCase().includes('联系') || message.toLowerCase().includes('email')) {
-        botResponse = '您可以通过"联系我"部分的表单给我发送消息，我会尽快回复您。';
-      }
+    if (!response.ok) {
+      throw new Error(`API请求失败: ${response.status}`);
+    }
 
-      const botMessage = document.createElement('div');
-      botMessage.className = 'message bot-message';
-      botMessage.innerHTML = `
-        <div class="message-avatar">
-          <img src="./img/机器人头像.jpg" alt="机器人头像">
-        </div>
-        <div class="message-content">${botResponse}</div>
-      `;
-      chatMessages.appendChild(botMessage);
-      
-      // 滚动到底部
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }, 800);
+    const data = await response.json();
+    return data.choices[0]?.message?.content?.trim() || '';
+  } catch (error) {
+    console.error('AI API调用失败:', error);
+    throw error; // 抛出错误以便外层处理
   }
 }
 
+// 备用回复系统
+function getFallbackResponse(message) {
+  const lowerMsg = message.toLowerCase();
+  
+  // 根据常见问题提供智能回复
+  if (/你好|hi|hello|嗨/.test(lowerMsg)) {
+    return '您好！我是AI助手，请问有什么可以帮您？';
+  }
+  if (/谢谢|感谢|thx/i.test(lowerMsg)) {
+    return '不客气，很高兴能帮到您！';
+  }
+  if (/再见|拜拜|bye/i.test(lowerMsg)) {
+    return '再见！如有需要随时找我。';
+  }
+  if (/帮助|help|支持/i.test(lowerMsg)) {
+    return '我可以回答各种问题，提供信息咨询，或者帮您解决技术问题。请具体说明您的需求。';
+  }
+  
+  // 通用回复
+  const fallbacks = [
+    '我理解您的问题了，但暂时无法连接到AI服务。您可以尝试稍后再问。',
+    '这个问题很有意思，不过我需要更多上下文才能给出准确回答。',
+    '感谢您的提问，建议您换种方式描述您的问题。',
+    '我正在学习回答这类问题，目前还不能完美解答。'
+  ];
+  
+  return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+}
+
+// 事件监听
 sendMessage.addEventListener('click', sendUserMessage);
 
 // 按Enter键发送消息
