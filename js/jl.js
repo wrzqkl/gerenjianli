@@ -171,6 +171,28 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  // 监听滚动事件，触发时间线动画
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  
+  function checkVisible() {
+  timelineItems.forEach(item => {
+      const rect = item.getBoundingClientRect();
+      const isVisible = (rect.top <= window.innerHeight - 100) && (rect.bottom >= 0);
+      
+      if (isVisible) {
+      item.classList.add('visible');
+      }
+  });
+  }
+  
+  // 初始检查
+  checkVisible();
+  
+  // 滚动时检查
+  window.addEventListener('scroll', checkVisible);
+});
+
 // 表单提交
 const contactForm = document.querySelector('.contact-form');
 contactForm.addEventListener('submit', (e) => {

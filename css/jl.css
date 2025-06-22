@@ -708,6 +708,165 @@ input:checked + .slider:before {
   }
 }
 
+/* 教育经历时间线样式 */
+.education {
+  margin-top: 30px;
+  padding-bottom: 20px;
+}
+
+.education h2 {
+  font-size: 1.8rem;
+  text-align: center;
+  color: #171718;
+  margin-bottom: 30px;
+}
+
+.dark-mode h2,
+.dark-mode h3 {
+  color: white;
+}
+
+.dark-mode .education h2 {
+  color: white;
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 时间线中心线 */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background-color: #3498db;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2px;
+}
+
+.dark-mode .timeline::after {
+  background-color: #81d4fa;
+}
+
+/* 时间点 */
+.timeline-item {
+  padding: 10px 40px;
+  position: relative;
+  width: 50%;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 时间点标识 */
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: -10px;
+  background-color: white;
+  border: 4px solid #3498db;
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.dark-mode .timeline-item::after {
+  background-color: #1a1a1a;
+  border-color: #81d4fa;
+}
+
+/* 右侧时间点 */
+.timeline-item:nth-child(odd) {
+  left: 0;
+}
+
+/* 左侧时间点 */
+.timeline-item:nth-child(even) {
+  left: 50%;
+}
+
+/* 左侧时间点标识调整 */
+.timeline-item:nth-child(even)::after {
+  left: -10px;
+}
+
+/* 时间线内容 */
+.timeline-content {
+  padding: 20px;
+  background-color: white;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .timeline-content {
+  background-color: #333;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-date {
+  font-weight: bold;
+  color: #3498db;
+  margin-bottom: 5px;
+}
+
+.dark-mode .timeline-date {
+  color: #81d4fa;
+}
+
+.timeline-school {
+  font-style: italic;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.dark-mode .timeline-school {
+  color: #aaa;
+}
+
+.timeline-desc {
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+  /* 调整中心线位置 */
+  .timeline::after {
+    left: 31px;
+  }
+  
+  /* 时间点宽度改为100% */
+  .timeline-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+  }
+  
+  /* 时间点标识 */
+  .timeline-item::after {
+    left: 21px;
+    top: 15px;
+  }
+  
+  /* 右侧时间点调整 */
+  .timeline-item:nth-child(even) {
+    left: 0;
+  }
+}
+
 /* 作品集部分 */
 .portfolio {
   margin-top: 30px;
