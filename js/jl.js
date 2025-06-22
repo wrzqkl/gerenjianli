@@ -1,10 +1,82 @@
-// 移动端导航菜单切换
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-bar ul');
-
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('active');
-});
+ // 侧边导航栏功能
+ const sidebar = document.getElementById('sidebar');
+ const navToggle = document.getElementById('nav-toggle');
+ const closeSidebar = document.getElementById('close-sidebar');
+ const overlay = document.getElementById('overlay');
+ const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+ 
+ // 深色模式切换功能
+ const themeToggle = document.getElementById('theme-toggle');
+ const themeSwitch = document.getElementById('theme-switch');
+ const htmlElement = document.documentElement;
+ const themeIcon = document.querySelector('.theme-icon i');
+ 
+ // 检查本地存储中的主题偏好
+ const isDarkMode = localStorage.getItem('darkMode') === 'true';
+ if (isDarkMode) {
+   htmlElement.classList.add('dark-mode');
+   themeSwitch.checked = true;
+   themeIcon.classList.remove('fa-moon');
+   themeIcon.classList.add('fa-sun');
+ }
+ 
+ // 侧边栏功能
+ function openSidebar() {
+   sidebar.classList.add('active');
+   setTimeout(() => {
+     overlay.style.opacity = '1';
+   }, 10);
+ }
+ 
+ function closeSidebarFunc() {
+   sidebar.classList.remove('active');
+   overlay.style.opacity = '0';
+   setTimeout(() => {
+     overlay.style.display = 'none';
+   }, 300);
+ }
+ 
+ navToggle.addEventListener('click', openSidebar);
+ closeSidebar.addEventListener('click', closeSidebarFunc);
+ overlay.addEventListener('click', closeSidebarFunc);
+ 
+ sidebarLinks.forEach(link => {
+   link.addEventListener('click', () => {
+     closeSidebarFunc();
+     
+     const targetId = link.getAttribute('href');
+     const targetElement = document.querySelector(targetId);
+     
+     if (targetElement) {
+       setTimeout(() => {
+         targetElement.scrollIntoView({
+           behavior: 'smooth'
+         });
+       }, 300);
+     }
+   });
+ });
+ 
+ // 深色模式切换
+ function toggleDarkMode() {
+   htmlElement.classList.toggle('dark-mode');
+   const isDark = htmlElement.classList.contains('dark-mode');
+   
+   // 更新图标
+   if (isDark) {
+     themeIcon.classList.remove('fa-moon');
+     themeIcon.classList.add('fa-sun');
+   } else {
+     themeIcon.classList.remove('fa-sun');
+     themeIcon.classList.add('fa-moon');
+   }
+   
+   // 保存主题偏好到本地存储
+   localStorage.setItem('darkMode', isDark);
+ }
+ 
+ themeToggle.addEventListener('click', toggleDarkMode);
+ themeSwitch.addEventListener('change', toggleDarkMode);
 
 // 平滑滚动
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -124,18 +196,18 @@ backToTop.addEventListener('click', () => {
   });
 });
 
-// 深色/浅色模式切换
-const darkModeToggle = document.getElementById('dark-mode-toggle');
-const body = document.body;
+// // 深色/浅色模式切换
+// const darkModeToggle = document.getElementById('dark-mode-toggle');
+// const body = document.body;
 
-darkModeToggle.addEventListener('click', () => {
-  body.classList.toggle('dark-mode');
-  if (body.classList.contains('dark-mode')) {
-    darkModeToggle.textContent = '浅色模式';
-  } else {
-    darkModeToggle.textContent = '深色模式';
-  }
-});
+// darkModeToggle.addEventListener('click', () => {
+//   body.classList.toggle('dark-mode');
+//   if (body.classList.contains('dark-mode')) {
+//     darkModeToggle.textContent = '浅色模式';
+//   } else {
+//     darkModeToggle.textContent = '深色模式';
+//   }
+// });
 
 // 聊天机器人功能
 const chatButton = document.getElementById('chat-button');

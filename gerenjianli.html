@@ -8,6 +8,45 @@
 
 </head>
 <body>
+   <!-- 侧边导航栏 -->
+   <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">导航菜单</div>
+      <div class="close-sidebar" id="close-sidebar">×</div>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="#home">首页</a></li>
+      <li><a href="#profile">个人简介</a></li>
+      <li><a href="#hobbies">个人爱好</a></li>
+      <li><a href="#skills">专业技能</a></li>
+      <li><a href="#portfolio">项目经验</a></li>
+      <li><a href="#contact">联系我</a></li>
+    </ul>
+
+    <!-- 深色模式切换 -->
+    <div class="theme-toggle" id="theme-toggle">
+      <div class="theme-icon">
+        <i class="fas fa-moon"></i>
+      </div>
+      <div class="theme-text">深色模式</div>
+      <div class="toggle-switch">
+        <input type="checkbox" id="theme-switch">
+        <label class="slider" for="theme-switch"></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- 导航栏标识 -->
+  <div class="nav-indicator"></div>
+
+  <!-- 导航栏切换按钮 -->
+  <div class="nav-toggle" id="nav-toggle">
+    <i class="fas fa-bars">Nav</i>
+  </div>
+
+  <!-- 遮罩层 -->
+  <div class="overlay" id="overlay"></div>
+
     <!-- 顶部背景及插画区域 -->
   <header class="top-bak" id="home">
     <img src="./img/插画背景.jpg" alt="插画背景" class="top-img">
@@ -18,18 +57,6 @@
       <h1 class="welcome-title">欢迎来到离思的个人主页</h1>
       <p class="welcome-subtitle">探索我的技能、项目和兴趣爱好</p>
     </div>
-    <nav class="nav-bar">
-      <ul>
-        <li><a href="#home">首页</a></li>
-        <li><a href="#profile">个人简介</a></li>
-        <li><a href="#hobbies">个人爱好</a></li>
-        <li><a href="#skills">专业技能</a></li>
-        <li><a href="#portfolio">项目经验</a></li>
-        <li><a href="#contact">联系我</a></li>
-      </ul>
-      <div class="hamburger"></div>
-      <button id="dark-mode-toggle">深色模式</button>
-    </nav>
   </header>
 
   <!-- 个人简介主体区域 -->
@@ -94,10 +121,10 @@
             </div>
           </div>
           <div class="carousel-control prev" data-hobby="photography">
-            <i class="fas fa-chevron-left"></i>
+            <i class="fas fa-chevron-left">←</i>
           </div>
           <div class="carousel-control next" data-hobby="photography">
-            <i class="fas fa-chevron-right"></i>
+            <i class="fas fa-chevron-right">→</i>
           </div>
           <div class="carousel-indicators" id="photography-indicators">
             <div class="indicator active" data-slide="0"></div>
@@ -123,10 +150,10 @@
             </div>
           </div>
           <div class="carousel-control prev" data-hobby="travel">
-            <i class="fas fa-chevron-left"></i>
+            <i class="fas fa-chevron-left">←</i>
           </div>
           <div class="carousel-control next" data-hobby="travel">
-            <i class="fas fa-chevron-right"></i>
+            <i class="fas fa-chevron-right">→</i>
           </div>
           <div class="carousel-indicators" id="travel-indicators">
             <div class="indicator active" data-slide="0"></div>
@@ -152,10 +179,10 @@
             </div>
           </div>
           <div class="carousel-control prev" data-hobby="music">
-            <i class="fas fa-chevron-left"></i>
+            <i class="fas fa-chevron-left">←</i>
           </div>
           <div class="carousel-control next" data-hobby="music">
-            <i class="fas fa-chevron-right"></i>
+            <i class="fas fa-chevron-right">→</i>
           </div>
           <div class="carousel-indicators" id="music-indicators">
             <div class="indicator active" data-slide="0"></div>
