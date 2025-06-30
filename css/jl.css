@@ -676,6 +676,14 @@ input:checked + .slider:before {
 
 .skill-item {
   margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.skill-item.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .skill-name {
@@ -706,6 +714,93 @@ input:checked + .slider:before {
   from {
       width: 0;
   }
+  to {
+    width: attr(data-width percentage); /* 根据data-width属性设置宽度 */
+  }
+}
+
+/* 技能部分新样式 */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.skill-bars {
+  flex: 1;
+  min-width: 300px;
+  margin-bottom: 2rem;
+}
+
+.skill-chart {
+  flex: 1;
+  min-width: 400px;
+  height: 500px;
+  margin-top: 3rem; /* 增加上边距使图表下移 */
+}
+
+@media (max-width: 768px) {
+  .skills-container {
+    flex-direction: column;
+  }
+  
+  .skill-bars, .skill-chart {
+    width: 100%;
+  }
+}
+
+/* 添加雷达图动画 */
+@keyframes radarAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.skill-chart {
+  animation: radarAnimation 1.5s ease-out;
+}
+
+/* 进度条动画增强 */
+.skill-progress {
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-progress::after {
+  content: '';
+  position: absolute;
+  top: 20;
+  height: 20px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0) 0%, 
+    rgba(255,255,255,0.3) 50%, 
+    rgba(255,255,255,0) 100%);
+  animation: progressShine 2.5s infinite;
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.dark-mode .skillsRadarChart {
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.dark-mode .skill-chart {
+  background-color: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 15px;
 }
 
 /* 教育经历时间线样式 */
@@ -901,6 +996,7 @@ input:checked + .slider:before {
 .portfolio-item:hover {
   transform: translateY(-10px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  background-color: #f5f5f5; /* 悬停时背景颜色变化 */
 }
 
 .portfolio-img {
@@ -1063,16 +1159,16 @@ textarea.form-control {
 }
 
 /* 返回顶部按钮 */
-.back-to-top {
+#back-to-top {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  display: none;
   background-color: #3498db;
   color: white;
-  padding: 10px;
+  padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
-  display: none;
 }
 
 /* 智能聊天机器人 - 左下角布局 */

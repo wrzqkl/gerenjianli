@@ -171,19 +171,136 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// 自动播放轮播图
+let autoplayInterval;
+
+function startAutoplay() {
+  autoplayInterval = setInterval(() => {
+    nextSlide();
+  }, 3000); // 每3秒切换一次
+}
+
+function stopAutoplay() {
+  clearInterval(autoplayInterval);
+}
+
+// 在页面加载时启动自动播放
+window.addEventListener('load', () => {
+  startAutoplay();
+  // 当鼠标悬停在轮播图上时停止自动播放，离开时恢复
+  const carousel = document.querySelector('.hobby-carousel');
+  carousel.addEventListener('mouseenter', stopAutoplay);
+  carousel.addEventListener('mouseleave', startAutoplay);
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // 动态加载Chart.js
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+  script.onload = initSkillsChart;
+  document.head.appendChild(script);
+  
+  function initSkillsChart() {
+    const ctx = document.getElementById('skillsRadarChart');
+    if (!ctx) return;
+    
+    new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['HTML/CSS', 'JavaScript', 'Python', 'C语言', '设计能力', '团队协作'],
+        datasets: [{
+          label: '技能评估',
+          data: [95, 90, 85, 80, 75, 85], // 对应技能值
+          backgroundColor: 'rgba(52, 152, 219, 0.5)',
+          borderColor: 'rgba(52, 152, 219, 1)',
+          pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+          pointBorderColor: '#fff',
+          pointHoverRadius: 6,
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(52, 152, 219, 1)',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            angleLines: {
+              display: true,
+              color: 'rgba(200, 200, 200, 0.3)'
+            },
+            suggestedMin: 0,
+            suggestedMax: 100,
+            ticks: {
+              stepSize: 20,
+              backdropColor: 'transparent'
+            },
+            pointLabels: {
+              font: {
+                size: 14,
+                family: '"微软雅黑", sans-serif'
+              },
+              color: function(context) {
+                return context.index % 2 === 0 ? '#3498db' : '#2980b9';
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.dataset.label + ': ' + context.raw + '%';
+              }
+            }
+          }
+        },
+        animation: {
+          duration: 2000,
+          easing: 'easeOutQuart'
+        }
+      }
+    });
+  }
+});
+
+// 添加JavaScript控制动画
+document.addEventListener('DOMContentLoaded', function() {
+  const radarChart = document.getElementById('radarChart');
+  let hasAnimated = false;
+
+  radarChart.addEventListener('mouseenter', function() {
+    if (!hasAnimated) {
+      this.classList.add('animate');
+      hasAnimated = true;
+      
+      // 动画结束后移除类，以便可以再次触发
+      setTimeout(() => {
+        this.classList.remove('animate');
+      }, 1500);
+    }
+  });
+});
+
 document.addEventListener('DOMContentLoaded', function() {
   // 监听滚动事件，触发时间线动画
   const timelineItems = document.querySelectorAll('.timeline-item');
   
   function checkVisible() {
-  timelineItems.forEach(item => {
-      const rect = item.getBoundingClientRect();
-      const isVisible = (rect.top <= window.innerHeight - 100) && (rect.bottom >= 0);
-      
-      if (isVisible) {
-      item.classList.add('visible');
-      }
-  });
+    timelineItems.forEach(item => {
+        const rect = item.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom >= 0) {
+          item.classList.add('visible');
+        } else {
+          item.classList.remove('visible');
+        }
+    });
   }
   
   // 初始检查
@@ -191,6 +308,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // 滚动时检查
   window.addEventListener('scroll', checkVisible);
+  window.addEventListener('load', checkVisibility);
 });
 
 // 表单提交
@@ -202,34 +320,22 @@ contactForm.addEventListener('submit', (e) => {
 });
 
 // 返回顶部按钮
-const backToTop = document.getElementById('back-to-top');
+const backToTopButton = document.getElementById('back-to-top');
+
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 200) {
-    backToTop.style.display = 'block';
+  if (window.scrollY > 300) {
+    backToTopButton.style.display = 'block';
   } else {
-    backToTop.style.display = 'none';
+    backToTopButton.style.display = 'none';
   }
 });
 
-backToTop.addEventListener('click', () => {
+backToTopButton.addEventListener('click', () => {
   window.scrollTo({
     top: 0,
     behavior: 'smooth'
   });
 });
-
-// // 深色/浅色模式切换
-// const darkModeToggle = document.getElementById('dark-mode-toggle');
-// const body = document.body;
-
-// darkModeToggle.addEventListener('click', () => {
-//   body.classList.toggle('dark-mode');
-//   if (body.classList.contains('dark-mode')) {
-//     darkModeToggle.textContent = '浅色模式';
-//   } else {
-//     darkModeToggle.textContent = '深色模式';
-//   }
-// });
 
 // 聊天机器人功能
 const chatButton = document.getElementById('chat-button');

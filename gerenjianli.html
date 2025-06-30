@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人简介与简历综合页</title>
     <link rel="stylesheet" href="./css/jl.css">
-
 </head>
 <body>
    <!-- 侧边导航栏 -->
@@ -91,13 +90,9 @@
             <span class="value" id="hobby">摄影 旅游 听歌</span>
           </div>
           <div class="intro">
-            <h3>个人简介</h3>
+            <h3>个人简介：</h3>
             <p id="self-intro">间歇性社牛，持续性社恐的infp人，日常爱捧着各种类型的书沉浸，也会循环治愈系歌单。闲暇时就奔赴不同城市乡镇，用镜头捕捉风土人情里的闪光瞬间，把旅途故事悄悄存进自己的精神宇宙。</p>
           </div>
-          <!-- <div class="intro">
-            <h3>教育经历</h3>
-            <p id="self-intro">于2023年从安徽省太和中学毕业，现就读于海南省三亚市三亚学院盛宝金融科技商学院区块链工程专业。</p>
-          </div> -->
         </div>
       </div>
     </section>
@@ -194,19 +189,19 @@
       </div>
     </div>
   </section>
-
+            
     <section id="skills" class="skills">
       <h2>我的技能</h2>
-      <div class="skill-item">
+      <div class="skill-contanin">
         <div class="skill-name">
           <span>HTML/CSS</span>
           <span>95%</span>
         </div>
         <div class="skill-bar">
-          <div class="skill-progress" style="width: 95%;"></div>
+          <div class="skill-progress" style="width: 95%;" data-width="95"></div>
         </div>
       </div>
-      <div class="skill-item">
+      <div class="skill-contanin">
         <div class="skill-name">
           <span>JavaScript</span>
           <span>90%</span>
@@ -215,7 +210,7 @@
           <div class="skill-progress" style="width: 90%;"></div>
         </div>
       </div>
-      <div class="skill-item">
+      <div class="skill-contanin">
         <div class="skill-name">
           <span>Python</span>
           <span>85%</span>
@@ -224,7 +219,7 @@
           <div class="skill-progress" style="width: 85%;"></div>
         </div>
       </div>
-      <div class="skill-item">
+      <div class="skill-contanin">
         <div class="skill-name">
           <span>C语言</span>
           <span>80%</span>
@@ -232,6 +227,12 @@
         <div class="skill-bar">
           <div class="skill-progress" style="width: 80%;"></div>
         </div>
+      </div>
+
+      <!-- 新增雷达图容器 -->
+      <div class="skill-chart">
+        <canvas id="skillsRadarChart"></canvas>
+        <div class="skillsRadarChart" id="radarChart"></div>
       </div>
     </section>
 
@@ -363,7 +364,7 @@
   </div>
 </div>
 
-  <div class="back-to-top" id="back-to-top">返回顶部</div>
+  <button id="back-to-top" class="btn">返回顶部</button>
 
   <footer class="footer">
     <p>版权所有 © 离思</p>
